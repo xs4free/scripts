@@ -17,21 +17,29 @@ Get-AppxPackage -Name MicrosoftTeams -AllUsers | Remove-AppxPackage -AllUsers -E
 # }
 # Set-ItemProperty $registryPath ConfigureChatAutoInstall -Value 0
 
-## Unpin Teams (personal) 
+## unpin Teams (personal) from taskbar
+$registryPath = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced"
+If (!(Test-Path $registryPath)) { 
+    New-Item $registryPath
+}
+Set-ItemProperty $registryPath -Name 'TaskbarMn' -Value 0
+Write-Host "Unpinned Teams Chat from taskbar"
+
+## Hide Teams (personal) app in Taskbar settings
 $registryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Chat"
 If (!(Test-Path $registryPath)) { 
     New-Item $registryPath
 }
-Set-ItemProperty $registryPath "ChatIcon" -Value 2
-Write-Host "Removed Teams Chat"
+Set-ItemProperty $registryPath -Name 'ChatIcon' -Value 3
+Write-Host "Hidden Teams Chat from Taskbar Settings"
 
 ## Show file extension in File Explorer
 Set-Itemproperty -path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'HideFileExt' -value 0
-Write-Host "File extension configured"
+Write-Host "Show file extensions in File Explorer configured"
 
 ## Show full path in title File Explorer
 Set-Itemproperty -path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState' -Name 'FullPath' -value 1
-Write-Host "Show full path in title configured"
+Write-Host "Show full path in title File Explorer configured"
 
 ## Show option run-as-different-user in start
 Set-Itemproperty -path 'HKCU:\\Software\Policies\Microsoft\Windows\Explorer' -Name 'ShowRunAsDifferentUserInStart' -value 1
