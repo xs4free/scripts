@@ -41,10 +41,6 @@ Write-Host "Show file extensions in File Explorer configured"
 Set-Itemproperty -path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\CabinetState' -Name 'FullPath' -value 1
 Write-Host "Show full path in title File Explorer configured"
 
-## Show option run-as-different-user in start
-Set-Itemproperty -path 'HKCU:\\Software\Policies\Microsoft\Windows\Explorer' -Name 'ShowRunAsDifferentUserInStart' -value 1
-Write-Host "Show option run-as-different-user in start configured"
-
-
 ## GIT config
 git config --global --add --bool push.autoSetupRemote true
+Write-Host "Git push.autSetupRemote configured"
