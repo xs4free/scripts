@@ -44,3 +44,6 @@ Write-Host "Show full path in title File Explorer configured"
 ## GIT config
 git config --global --add --bool push.autoSetupRemote true
 Write-Host "Git push.autSetupRemote configured"
+
+## Update powershell help
+Update-Help
